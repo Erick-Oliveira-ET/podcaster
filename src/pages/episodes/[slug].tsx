@@ -69,6 +69,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
     fallback: "blocking",
+    // O fallback possui configurações de como o Next vai reagir à solicitação de dados da página.
+    //   Opções:
+    //     - false: se a página não tiver sido construida durante a build,
+    // o next vai retornar página não encontrada(404)
+    //     - true: o next vai buscar os dados no client
+    //     - blocking: ele carrega os dados no servidor next
   };
 };
 
