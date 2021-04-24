@@ -1,6 +1,7 @@
 import format from "date-fns/format";
 import ptBR from "date-fns/locale/pt-BR";
 import parseISO from "date-fns/parseISO";
+import { useContext } from "react";
 
 import Image from "next/image";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -10,6 +11,7 @@ import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
 
 import styles from "./episode.module.scss";
+import { PlayerContext } from "../../contexts/PlayerContext";
 
 type Episode = {
   id: string;
@@ -28,6 +30,8 @@ type EpisodeProps = {
 };
 
 export default function Episode({ episode }: EpisodeProps) {
+  const { play } = useContext(PlayerContext);
+
   return (
     <div className={styles.episodeContainer}>
       <div className={styles.episode}>
@@ -44,7 +48,7 @@ export default function Episode({ episode }: EpisodeProps) {
             objectFit="cover"
           />
 
-          <button type="button">
+          <button type="button" onClick={() => play(episode)}>
             <img src="/play.svg" alt="Tocar" />
           </button>
         </div>
