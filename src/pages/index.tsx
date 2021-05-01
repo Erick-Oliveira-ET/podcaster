@@ -139,7 +139,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   let data = require("../../server.js");
   data = data.default.episodes;
-  console.log(data);
 
   const episodes: Episode[] = data.map((episode) => {
     const { id, title, thumbnail, members, file, description } = episode;
@@ -148,7 +147,7 @@ export const getStaticProps: GetStaticProps = async () => {
       title,
       thumbnail,
       members,
-      publishedAt: format(parseISO(episode.published_at), "d MM yy", {
+      publishedAt: format(parseISO(episode.published_at), "d MMM yy", {
         locale: ptBR,
       }),
       durationAsString: convertDurationToTimeString(Number(file.duration)),
