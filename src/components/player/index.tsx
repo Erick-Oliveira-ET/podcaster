@@ -35,10 +35,9 @@ export const Player = () => {
     }
 
     if (isPlaying) {
-      console.log("Pause");
-      audioRef.current.pause();
-    } else {
       audioRef.current.play();
+    } else {
+      audioRef.current.pause();
     }
   }, [isPlaying]);
 

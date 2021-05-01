@@ -1,7 +1,7 @@
 import format from "date-fns/format";
 import ptBR from "date-fns/locale/pt-BR";
 import parseISO from "date-fns/parseISO";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 import Image from "next/image";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -11,6 +11,7 @@ import { convertDurationToTimeString } from "../../utils/convertDurationToTimeSt
 
 import styles from "./episode.module.scss";
 import { PlayerContext } from "../../contexts/PlayerContext";
+import { Head } from "next/document";
 
 type Episode = {
   id: string;
