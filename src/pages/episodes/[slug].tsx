@@ -84,18 +84,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params;
 
-  let data = require("../../server.json");
-  console.log(data);
-  data = data.episodes.map((ep: Episode) => {
-    console.log("ep", ep);
-    if (slug === id) {
-      return ep;
+  let data = require("../../../server.js");
+  data = data.default;
+  data.episodes.map((ep: Episode) => {
+    if (slug === ep.id) {
+      data = ep;
     }
   });
 
-  console.log("data", data);
   const { id, title, thumbnail, members, file, description } = data;
-  console.table({ id, title, thumbnail, members, file, description });
   const episode = {
     id,
     title,

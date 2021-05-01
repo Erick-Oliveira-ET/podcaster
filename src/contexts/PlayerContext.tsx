@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
 interface Episode {
   title: string;
@@ -38,7 +38,7 @@ export function PlayerContextProvider({
 }: PlayerContextProviderProps) {
   const [episodeList, setEpisodeList] = useState([]);
   const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
   const [isShuffling, setIsShuffling] = useState(false);
 
@@ -48,7 +48,7 @@ export function PlayerContextProvider({
     setIsPlaying(true);
   }
 
-  function play(episode) {
+  function play(episode: Episode) {
     setEpisodeList([episode]);
     setCurrentEpisodeIndex(0);
     setIsPlaying(true);
@@ -74,16 +74,16 @@ export function PlayerContextProvider({
   const hasNext = isShuffling || currentEpisodeIndex + 1 < episodeList.length;
 
   function playNext() {
-    if (hasNext) setCurrentEpisodeIndex(currentEpisodeIndex + 1);
-  }
-
-  function playPrevious() {
     if (isShuffling) {
       const nextRandomEpisodeIndex = Math.floor(
         Math.random() * episodeList.length
       );
       setCurrentEpisodeIndex(nextRandomEpisodeIndex);
-    } else if (hasPrevious) setCurrentEpisodeIndex(currentEpisodeIndex - 1);
+    } else if (hasNext) setCurrentEpisodeIndex(currentEpisodeIndex + 1);
+  }
+
+  function playPrevious() {
+    if (hasPrevious) setCurrentEpisodeIndex(currentEpisodeIndex - 1);
   }
 
   function clearState() {

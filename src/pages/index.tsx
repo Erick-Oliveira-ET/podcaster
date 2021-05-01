@@ -137,8 +137,9 @@ export const getStaticProps: GetStaticProps = async () => {
   //   },
   // });
 
-  let data = require("../../server.json");
-  data = data.episodes;
+  let data = require("../../server.js");
+  data = data.default.episodes;
+  console.log(data);
 
   const episodes: Episode[] = data.map((episode) => {
     const { id, title, thumbnail, members, file, description } = episode;
