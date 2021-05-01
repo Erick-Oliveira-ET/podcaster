@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { GetStaticProps } from "next";
-import { api } from "../services/api";
 import { format, parseISO } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
@@ -130,13 +129,16 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get("episodes", {
-    params: {
-      _limit: 12,
-      _sort: "published_at",
-      _order: "desc",
-    },
-  });
+  // const { data } = await api.get("episodes", {
+  //   params: {
+  //     _limit: 12,
+  //     _sort: "published_at",
+  //     _order: "desc",
+  //   },
+  // });
+
+  let data = require("../../server.json");
+  data = data.episodes;
 
   const episodes: Episode[] = data.map((episode) => {
     const { id, title, thumbnail, members, file, description } = episode;

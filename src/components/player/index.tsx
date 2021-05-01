@@ -30,11 +30,12 @@ export const Player = () => {
   } = useContext(PlayerContext);
 
   useEffect(() => {
-    if (audioRef.current) {
+    if (!audioRef.current) {
       return;
     }
 
     if (isPlaying) {
+      console.log("Pause");
       audioRef.current.pause();
     } else {
       audioRef.current.play();

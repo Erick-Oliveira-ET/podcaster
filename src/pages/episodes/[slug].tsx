@@ -7,7 +7,6 @@ import Image from "next/image";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
 
-import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
 
 import styles from "./episode.module.scss";
@@ -85,8 +84,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params;
 
-  const { data } = await api.get(`/episodes/${slug}`);
+  let data = require("../../server.json");
+  console.log(data);
+  data = data.episodes.map((ep: Episode) => {
+    console.log("ep", ep);
+    if (slug === id) {
+      return ep;
+    }
+  });
+
+  console.log("data", data);
   const { id, title, thumbnail, members, file, description } = data;
+  console.table({ id, title, thumbnail, members, file, description });
   const episode = {
     id,
     title,

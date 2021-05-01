@@ -11,9 +11,11 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           ></link>
           <link rel="stylesheet" href="/favicon.png" type="image/png" />
-          <title>Podcastr</title>
         </Head>
         <body>
+          <head>
+            <title>Podcastr</title>
+          </head>
           <Main />
           <NextScript />
         </body>
